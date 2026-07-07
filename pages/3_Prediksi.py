@@ -404,128 +404,67 @@ prediksi = st.button(
 if prediksi:
 
     hasil = model.predict(input_scaled)[0]
-
     probabilitas = model.predict_proba(input_scaled)[0]
-
-    st.divider()
 
     st.header("📊 Hasil Prediksi")
 
     if hasil == 0:
-
         st.success("✅ Risiko : Tidak Diabetes")
 
     elif hasil == 1:
-
         st.warning("⚠️ Risiko : Prediabetes")
 
     else:
-
         st.error("🚨 Risiko : Diabetes")
 
-        st.subheader("Probabilitas Prediksi")
+    # ==========================
+    # GRAFIK
+    # ==========================
 
-        st.write("🟢 Tidak Diabetes")
+    st.subheader("📈 Grafik Probabilitas")
 
-        st.progress(float(probabilitas[0]))
-
-        st.write(f"{probabilitas[0]*100:.2f}%")
-
-        st.write("🟡 Prediabetes")
-
-        st.progress(float(probabilitas[1]))
-
-        st.write(f"{probabilitas[1]*100:.2f}%")
-
-        st.write("🔴 Diabetes")
-
-        st.progress(float(probabilitas[2]))
-
-        st.write(f"{probabilitas[2]*100:.2f}%")
-
-        st.subheader("Grafik Probabilitas")
-
-        chart = pd.DataFrame({
-
-        "Kategori":[
+    chart = pd.DataFrame({
+        "Kategori": [
             "Tidak Diabetes",
             "Prediabetes",
             "Diabetes"
         ],
-
-        "Probabilitas":[
-
+        "Probabilitas": [
             probabilitas[0],
-
             probabilitas[1],
-
             probabilitas[2]
-
         ]
-
     })
 
-st.subheader("📈 Grafik Probabilitas")
+    st.bar_chart(
+        chart,
+        x="Kategori",
+        y="Probabilitas"
+    )
 
-chart = pd.DataFrame({
-    "Kategori": [
-        "Tidak Diabetes",
-        "Prediabetes",
-        "Diabetes"
-    ],
-    "Probabilitas": [
-        probabilitas[0],
-        probabilitas[1],
-        probabilitas[2]
-    ]
-})
+    # ==========================
+    # REKOMENDASI
+    # ==========================
 
-st.bar_chart(
-    data=chart,
-    x="Kategori",
-    y="Probabilitas",
-    use_container_width=True
-)
+    st.subheader("💡 Rekomendasi")
 
-st.subheader("💡 Rekomendasi")
+    if hasil == 0:
 
-if hasil == 0:
+        st.success("...")
 
-        st.success("""
+    elif hasil == 1:
 
-✅ Pertahankan pola hidup sehat
+        st.warning("...")
 
-• Konsumsi buah dan sayur
+    else:
 
-• Olahraga minimal 30 menit
+        st.error("...")
 
-• Kurangi gula
+    # ==========================
+    # DOWNLOAD
+    # ==========================
 
-• Hindari rokok
-
-• Rutin cek kesehatan
-
-""")
-        
-elif hasil == 1:
-
-     st.warning("""
-
-⚠️ Anda memiliki risiko Prediabetes
-
-• Kurangi makanan manis
-
-• Perbanyak aktivitas fisik
-
-• Turunkan berat badan
-
-• Periksa gula darah secara rutin
-
-""")
-        
-st.subheader("⬇️ Download Hasil")
-
-hasil_text = (
+    hasil_text = (
         "Tidak Diabetes"
         if hasil == 0
         else "Prediabetes"
@@ -533,20 +472,15 @@ hasil_text = (
         else "Diabetes"
     )
 
-ringkasan = input_data.copy()
+    ringkasan = input_data.copy()
 
-ringkasan["Hasil Prediksi"] = hasil_text
+    ringkasan["Hasil Prediksi"] = hasil_text
 
-csv = ringkasan.to_csv(index=False).encode("utf-8")
+    csv = ringkasan.to_csv(index=False).encode("utf-8")
 
-st.download_button(
-
+    st.download_button(
         "📄 Download Hasil Prediksi",
-
         csv,
-
         "hasil_prediksi.csv",
-
         "text/csv"
-
     )
