@@ -93,7 +93,7 @@ print(confusion_matrix(y_test, y_pred))
 # 8. Simpan Model
 # ============================
 
-joblib.dump(model, "model.pkl"compress=3)
+joblib.dump(model, "model.pkl", compress=3)
 joblib.dump(scaler, "scaler.pkl")
 
 print("\nModel berhasil disimpan.")
