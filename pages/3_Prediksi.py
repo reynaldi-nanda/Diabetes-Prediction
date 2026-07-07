@@ -450,15 +450,53 @@ if prediksi:
 
     if hasil == 0:
 
-        st.success("...")
+        st.success("""
 
+✅ Pertahankan pola hidup sehat
+
+• Konsumsi buah dan sayur
+
+• Olahraga minimal 30 menit
+
+• Kurangi gula
+
+• Hindari rokok
+
+• Rutin cek kesehatan
+
+""")
+        
     elif hasil == 1:
 
-        st.warning("...")
+        st.warning("""
 
+⚠️ Anda memiliki risiko Prediabetes
+
+• Kurangi makanan manis
+
+• Perbanyak aktivitas fisik
+
+• Turunkan berat badan
+
+• Periksa gula darah secara rutin
+
+""")
+        
     else:
 
-        st.error("...")
+        st.error("""
+
+🚨 Risiko Diabetes cukup tinggi
+
+• Segera konsultasi ke dokter
+
+• Lakukan pemeriksaan gula darah
+
+• Terapkan pola makan sehat
+
+• Ikuti anjuran tenaga medis
+
+""")
 
     # ==========================
     # DOWNLOAD
