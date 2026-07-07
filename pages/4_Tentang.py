@@ -201,7 +201,7 @@ st.divider()
 st.subheader("👨‍💻 Pengembang")
 
 st.write("""
-Nama : **Reynaldi Nanfa Eka Putra**
+Nama : **Reynaldi Nanda Eka Putra**
 
 Program Studi : **Informatika**
 
