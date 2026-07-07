@@ -465,15 +465,31 @@ if prediksi:
 
     })
 
-    st.bar_chart(
-        chart,
-        x="Kategori",
-        y="Probabilitas"
-    )
+st.subheader("📈 Grafik Probabilitas")
 
-    st.subheader("💡 Rekomendasi")
+chart = pd.DataFrame({
+    "Kategori": [
+        "Tidak Diabetes",
+        "Prediabetes",
+        "Diabetes"
+    ],
+    "Probabilitas": [
+        probabilitas[0],
+        probabilitas[1],
+        probabilitas[2]
+    ]
+})
 
-    if hasil == 0:
+st.bar_chart(
+    data=chart,
+    x="Kategori",
+    y="Probabilitas",
+    use_container_width=True
+)
+
+st.subheader("💡 Rekomendasi")
+
+if hasil == 0:
 
         st.success("""
 
@@ -491,9 +507,9 @@ if prediksi:
 
 """)
         
-    elif hasil == 1:
+elif hasil == 1:
 
-        st.warning("""
+     st.warning("""
 
 ⚠️ Anda memiliki risiko Prediabetes
 
@@ -507,9 +523,9 @@ if prediksi:
 
 """)
         
-        st.subheader("⬇️ Download Hasil")
+st.subheader("⬇️ Download Hasil")
 
-    hasil_text = (
+hasil_text = (
         "Tidak Diabetes"
         if hasil == 0
         else "Prediabetes"
@@ -517,13 +533,13 @@ if prediksi:
         else "Diabetes"
     )
 
-    ringkasan = input_data.copy()
+ringkasan = input_data.copy()
 
-    ringkasan["Hasil Prediksi"] = hasil_text
+ringkasan["Hasil Prediksi"] = hasil_text
 
-    csv = ringkasan.to_csv(index=False).encode("utf-8")
+csv = ringkasan.to_csv(index=False).encode("utf-8")
 
-    st.download_button(
+st.download_button(
 
         "📄 Download Hasil Prediksi",
 
