@@ -143,5 +143,5 @@ st.divider()
 # ==========================================
 
 st.caption(
-    "© 2026 | Diabetes Prediction Dashboard | Streamlit + Scikit-Learn"
+    "© 2026 | Reynaldi Nanda Eka Putra | Diabetes Prediction Dashboard | Streamlit + Scikit-Learn"
 )
